@@ -9,23 +9,24 @@ import Foundation
 import Files
 
 struct Finder {
-    func find() {
+    func find(resource: String) {
         var files = [File]()
-
+        
         Folder.current.files.recursive.forEach { file in
-            do {
-                let content = try file.readAsString()
-                if content.contains("swift") {
-                    files.append(file)
+            if SearchableFile.files.contains(file.extension ?? "") {
+                do {
+                    let content = try file.readAsString()
+                    if content.contains(resource) {
+                        files.append(file)
+                    }
+                } catch {
+                    print(error)
                 }
-            } catch {
-                print(error)
             }
         }
-
+        
         if !files.isEmpty {
             print("\n")
-            print("These files contains:")
             files.forEach { print($0.name) }
         }
     }

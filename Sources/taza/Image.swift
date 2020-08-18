@@ -6,11 +6,13 @@
 //
 
 import Foundation
+import Files
 
 enum ImageType: String, CaseIterable {
     case img
     case jpg
     case pdf
+    case png
 }
 
 struct Image {
@@ -24,12 +26,15 @@ struct Image {
         self.path = path
     }
     
-    init?(name: String, path: String) {
-        guard let typeString = name.components(separatedBy: ".").last,
-            let type = ImageType(rawValue: typeString) else {
-                return nil
+    init?(file: File) {
+        guard let fileExtension = file.extension else {
+            return nil
+        }
+
+        guard let type = ImageType(rawValue: fileExtension) else {
+            return nil
         }
         
-        self.init(type: type, name: name, path: path)
+        self.init(type: type, name: file.name, path: file.path)
     }
 }
