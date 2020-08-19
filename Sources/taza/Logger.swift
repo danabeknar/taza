@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ColorizeSwift
 
 struct Logger {
     let resources: [Image]
@@ -16,15 +17,14 @@ struct Logger {
     
     func log() {
         if resources.isEmpty {
-            print("Nothing found")
+            print("\n🥳  Your codebase is awesome! I found nothing.".lightGreen())
             
             return
         }
         
-        print("\n")
-        print("These resources are unused:")
+        print("\n🧐  I have found \(resources.count) unused resources, make sure to look at them:\n".lightBlue().bold())
         resources.forEach { image in
-            print("Resource: \(image.name), type: \(image.type), path: \(image.path)")
+            print("🔍 Resource: \(image.name), path: \(image.path)")
         }
     }
 }
