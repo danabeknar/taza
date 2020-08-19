@@ -15,7 +15,7 @@ enum ImageType: String, CaseIterable {
     case png
 }
 
-struct Image {
+struct Image: Hashable {
     let type: ImageType
     let name: String
     let path: String

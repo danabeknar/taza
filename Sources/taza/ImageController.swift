@@ -9,7 +9,7 @@ import Foundation
 import Files
 
 struct ImageController {
-    let images: [Image]
+    public let images: [Image]
     
     init() {
         let images = Folder.current.files.recursive

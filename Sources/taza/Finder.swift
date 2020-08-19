@@ -9,25 +9,29 @@ import Foundation
 import Files
 
 struct Finder {
-    func find(resource: String) {
-        var files = [File]()
-        
-        Folder.current.files.recursive.forEach { file in
-            if SearchableFile.files.contains(file.extension ?? "") {
+    lazy var imageController = ImageController()
+    var searchableFiles = [File]()
+    
+    init() {
+        searchableFiles = Folder.current.files.recursive
+            .filter { SearchableFile.files.contains($0.extension ?? "") }
+    }
+    
+    mutating func unusedResources() -> Set<Image> {
+        var unused = Set<Image>()
+        searchableFiles.forEach { file in
+            imageController.images.forEach { image in
                 do {
                     let content = try file.readAsString()
-                    if content.contains(resource) {
-                        files.append(file)
+                    if !content.contains(image.name) {
+                        unused.insert(image)
                     }
                 } catch {
-                    print(error)
+                    print(error.localizedDescription)
                 }
             }
         }
         
-        if !files.isEmpty {
-            print("\n")
-            files.forEach { print($0.name) }
-        }
+        return unused
     }
 }
