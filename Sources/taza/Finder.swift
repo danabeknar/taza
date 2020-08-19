@@ -17,7 +17,7 @@ struct Finder {
             .filter { SearchableFile.files.contains($0.extension ?? "") }
     }
     
-    mutating func unusedResources() -> Set<Image> {
+    mutating func unusedResources() -> [Image] {
         var unused = Set<Image>()
         searchableFiles.forEach { file in
             imageController.images.forEach { image in
@@ -32,6 +32,6 @@ struct Finder {
             }
         }
         
-        return unused
+        return Array(unused)
     }
 }

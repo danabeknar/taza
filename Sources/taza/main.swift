@@ -1,4 +1,3 @@
 var finder = Finder()
-print(finder.unusedResources())
-
-print("Hello, World!")
+let logger = Logger(with: finder.unusedResources())
+logger.log()
