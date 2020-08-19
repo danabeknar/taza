@@ -1,5 +1,1 @@
-import ColorizeSwift
-
-var finder = Finder()
-let logger = Logger(with: finder.unusedResources())
-logger.log()
+TazaCommand().run()
