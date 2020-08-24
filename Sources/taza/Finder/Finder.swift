@@ -15,7 +15,7 @@ struct Finder {
 
         resources.forEach { resource in
             searchableFiles.forEach { file in
-                if file.hasResource(resource) {
+                if !file.hasResource(resource) {
                     unusedResources.insert(resource)
                 }
             }

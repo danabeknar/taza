@@ -51,7 +51,7 @@ struct Logger {
             return
         }
 
-        print("\n🧐  I have found \(resources.count) unused resources, make sure to look at them:\n"
+        print("\n🧐  I have found \(resources.count) unused resources, make sure to look at them:"
                 .lightBlue()
                 .bold())
         resources.forEach { image in
