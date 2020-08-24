@@ -12,9 +12,6 @@ let package = Package(
     targets: [
         .target(
             name: "taza",
-            dependencies: ["Files", "ColorizeSwift"]),
-        .testTarget(
-            name: "tazaTests",
-            dependencies: ["taza"]),
+            dependencies: ["Files", "ColorizeSwift"])
     ]
 )

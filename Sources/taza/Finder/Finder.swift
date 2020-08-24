@@ -15,19 +15,16 @@ struct Finder {
 
         resources.forEach { resource in
             searchableFiles.forEach { file in
-                do {
-                    let content = try file.readAsString()
-                    if !content.contains(resource.name) {
-                        unusedResources.insert(resource)
-                    }
-                } catch { }
+                if file.hasResource(resource) {
+                    unusedResources.insert(resource)
+                }
             }
         }
 
         return Array(unusedResources)
     }
 
-    var searchableFiles: [File] {
+    var searchableFiles: [Searchable] {
         searchableFilesController.searchableFiles
     }
 

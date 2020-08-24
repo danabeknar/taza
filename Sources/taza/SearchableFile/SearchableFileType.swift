@@ -9,8 +9,8 @@ import Foundation
 
 /// Files types to be searched for
 enum SearchableFileType: String, CaseIterable {
-    case swift
     case m
-    case xib
+    case swift
     case storyboard
+    case xib
 }

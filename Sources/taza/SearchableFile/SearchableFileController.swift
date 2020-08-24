@@ -9,12 +9,12 @@ import Foundation
 import Files
 
 protocol SearchableFileControllerProtocol {
-    var searchableFiles: [File] { get }
+    var searchableFiles: [Searchable] { get }
 }
 
 struct SearchableFileController: SearchableFileControllerProtocol {
     // MARK: - Public properties
-    var searchableFiles = [File]()
+    var searchableFiles = [Searchable]()
 
     // MARK: - Private properties
     private lazy var searchableFileTypes = SearchableFileType.allCases.map { $0.rawValue }
@@ -22,6 +22,7 @@ struct SearchableFileController: SearchableFileControllerProtocol {
     // MARK: - Init
     init() {
         searchableFiles = Folder.current.files.recursive
-                            .filter { searchableFileTypes.contains($0.extension ?? "") }
+            .map { SearchableFile(file: $0) }
+            .compactMap { $0 }
     }
 }
