@@ -11,17 +11,17 @@ import Files
 struct Finder {
     // MARK: - Public properties
     var unusedResourcesInSearchableFiles: [Resource] {
-        var unusedResources = Set<Resource>()
-
-        resources.forEach { resource in
-            searchableFiles.forEach { file in
-                if !file.hasResource(resource) {
-                    unusedResources.insert(resource)
+        var usedResources = [Resource]()
+        
+        for file in searchableFiles {
+            for resource in resources {
+                if file.hasResource(resource) {
+                    usedResources.append(resource)
                 }
             }
         }
 
-        return Array(unusedResources)
+        return resources.filter { !usedResources.contains($0) }
     }
 
     var searchableFiles: [Searchable] {
