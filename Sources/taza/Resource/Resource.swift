@@ -11,15 +11,20 @@ import Files
 struct Resource: Hashable {
     // MARK: - Public properties
     let name: String
+    let nameExcludingExtension: String
     let path: String
 
     // MARK: - Private properties
     private let type: ResourceType
 
     // MARK: - Init
-    private init(type: ResourceType, name: String, path: String) {
+    private init(type: ResourceType,
+                 name: String,
+                 nameExcludingExtension: String,
+                 path: String) {
         self.type = type
         self.name = name
+        self.nameExcludingExtension = nameExcludingExtension
         self.path = path
     }
 
@@ -32,6 +37,9 @@ struct Resource: Hashable {
             return nil
         }
 
-        self.init(type: type, name: file.name, path: file.path)
+        self.init(type: type,
+                  name: file.name,
+                  nameExcludingExtension: file.nameExcludingExtension,
+                  path: file.path)
     }
 }
