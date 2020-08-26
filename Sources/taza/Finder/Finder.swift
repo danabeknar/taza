@@ -17,6 +17,8 @@ struct Finder {
             for resource in resources {
                 if file.hasResource(resource) {
                     usedResources.append(resource)
+                    
+                    continue
                 }
             }
         }
