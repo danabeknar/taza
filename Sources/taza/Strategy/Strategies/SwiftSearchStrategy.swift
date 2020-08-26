@@ -15,6 +15,10 @@ struct SwiftSearchStrategy: SearchStrategy {
     }
     
     func hasResource(_ resource: Resource) -> Bool {
-        content.contains("UIImage(named: \"" + resource.name + "\")")
+        contentContains(resource.nameExcludingExtension) || contentContains(resource.name)
+    }
+    
+    private func contentContains(_ text: String) -> Bool {
+        content.contains("UIImage(named: \"" + text + "\")")
     }
 }

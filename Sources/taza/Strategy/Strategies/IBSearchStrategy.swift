@@ -15,6 +15,10 @@ struct IBSearchStrategy: SearchStrategy {
     }
     
     func hasResource(_ resource: Resource) -> Bool {
-        content.contains("image=\"" + resource.nameExcludingExtension + "\"")
+        contentContains(resource.nameExcludingExtension) || contentContains(resource.name)
+    }
+    
+    private func contentContains(_ text: String) -> Bool {
+        content.contains("image=\"" + text + "\"")
     }
 }
