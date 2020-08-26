@@ -29,7 +29,7 @@ struct Logger {
         print("\n🕯  Searching files..."
                 .lightMagenta()
                 .bold())
-        print("🗂  \(viewModel.foundFilesCount) files found."
+        print("🗂  \("file".pluralize(count: viewModel.foundFilesCount)) found"
                 .lightMagenta())
     }
 
@@ -37,7 +37,7 @@ struct Logger {
         print("\n🕯  Searching resources..."
                 .lightCyan()
                 .bold())
-        print("🖼  \(viewModel.foundResourcesCount) resources found."
+        print("🖼  \("resource".pluralize(count: viewModel.foundResourcesCount)) found"
                 .lightCyan())
     }
 
@@ -51,7 +51,7 @@ struct Logger {
             return
         }
 
-        print("\n🧐  I have found \(resources.count) unused resources, make sure to look at them:"
+        print("\n🧐  I have found \("unused resource".pluralize(count: resources.count)), make sure to look at them:"
                 .lightBlue()
                 .bold())
         resources.forEach { image in
