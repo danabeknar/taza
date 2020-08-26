@@ -9,10 +9,10 @@ Allows to easily find unused resources in XCode project.
 ## How it works
 1. A script looks for images. For now it supports 4 types: *.pdf, .png, .img, .jpg*; 
 2. It finds image-containable file. There are 4 types as well: *.swift, .m, .xib, .storyboard*;
-3. Then it loops through images and files, checking if a file contains an image. The checking depends on the file type:
-    - If it's `.swift` file, the script searches `UIImage(named: "imageName")` occurences;
-    - If it's `.m` file, the script searches `[UIImage imageNamed: @"imageName"]` occurences;
-    - If it's `.xib`/`.storyboard` file, the script searches `image="imageName"` occurences;
+3. Then it loops through images and files, checking if a file contains an image. The checking depends on the file extension:
+- If it's `.swift` file, the script searches `UIImage(named: "imageName")` & `UIImage(named: "imageName.extension")` occurences;
+- If it's `.m` file, the script searches `[UIImage imageNamed:@"imageName"]` & `[UIImage imageNamed:@"imageName.extension"]` occurences;
+- If it's `.xib`/`.storyboard` file, the script searches `image="imageName"` & `image="imageName.extension"`  occurences;
 4.  If the script could find unused image in these files, it prints them in a good-looking way:
 ![Result](https://i.imgur.com/8dL37RJ.png)
 
@@ -33,8 +33,10 @@ taza
 
 To Do:
 -------
-- [ ] List all found files
-- [ ] Removing of images
+- [ ] Pluralize and singularize logs
+- [ ] List files
+- [ ] List resources
+- [ ] Removing images
 
 ## Dependencies
 - [Files](https://github.com/JohnSundell/Files)
