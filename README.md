@@ -14,7 +14,7 @@ Allows to easily find unused resources in XCode project.
 - If it's `.m` file, the script searches `[UIImage imageNamed:@"imageName"]` & `[UIImage imageNamed:@"imageName.extension"]` occurences;
 - If it's `.xib`/`.storyboard` file, the script searches `image="imageName"` & `image="imageName.extension"`  occurences;
 4.  If the script could find unused image in these files, it prints them in a good-looking way:
-![Result](https://i.imgur.com/8dL37RJ.png)
+![Result](https://i.imgur.com/HFISKQM.png)
 
 ## Installation
 The easiest way to install Taza is using Swift Package Manager:
@@ -33,7 +33,6 @@ taza
 
 To Do:
 -------
-- [ ] Pluralize and singularize logs
 - [ ] List files
 - [ ] List resources
 - [ ] Removing images
