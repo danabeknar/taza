@@ -19,6 +19,6 @@ struct ObjectiveCSearchStrategy: SearchStrategy {
     }
     
     private func contentContains(_ text: String) -> Bool {
-        content.contains("[UIImage imageNamed: @\"" + text + "\"]")
+        content.contains("[UIImage imageNamed:@\"" + text + "\"]")
     }
 }
