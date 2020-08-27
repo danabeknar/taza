@@ -12,12 +12,12 @@ struct Finder {
     // MARK: - Public properties
     var unusedResourcesInSearchableFiles: [Resource] {
         var usedResources = [Resource]()
-        
+    
         for file in searchableFiles {
             for resource in resources {
                 if file.hasResource(resource) {
                     usedResources.append(resource)
-                    
+
                     continue
                 }
             }

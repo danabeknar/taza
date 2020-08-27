@@ -9,9 +9,9 @@ import Foundation
 
 struct StrategyFactory {
     static let shared = StrategyFactory()
-    
+
     private init() {}
-    
+
     func strategy(type: SearchableFileType, content: String) -> SearchStrategy {
         switch type {
         case .m:

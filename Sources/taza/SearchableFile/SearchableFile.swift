@@ -11,7 +11,7 @@ struct SearchableFile: Searchable {
     let content: String
     let type: SearchableFileType
     let strategy: SearchStrategy
-    
+
     private init(type: SearchableFileType, content: String) {
         self.type = type
         self.content = content
@@ -34,7 +34,7 @@ struct SearchableFile: Searchable {
             return nil
         }
     }
-    
+
     func hasResource(_ resource: Resource) -> Bool {
         strategy.hasResource(resource)
     }
