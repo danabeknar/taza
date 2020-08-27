@@ -21,7 +21,7 @@ struct Logger {
     func log() {
         logFoundFiles()
         logFoundResources()
-        logRecourcesResult()
+        logResourcesResult()
     }
 
     // MARK: - Private methods
@@ -41,11 +41,11 @@ struct Logger {
                 .lightCyan())
     }
 
-    private func logRecourcesResult() {
+    private func logResourcesResult() {
         let resources = viewModel.unusedResources
 
         if resources.isEmpty {
-            print("\n🥳  Your codebase is awesome! Each resource is used."
+            print("\n🥳  Your codebase is awesome! No unused resources found."
                     .lightGreen())
 
             return

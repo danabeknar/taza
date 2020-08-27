@@ -26,13 +26,14 @@ $ cp -f .build/release/taza /usr/local/bin/taza
 ```
 
 ## Usage
-Without any specifications (have to be executed in the directory where XCode project is located).
+Without any specifications (have to be executed in the directory where Xcode project is located).
 ```bash
 taza
 ```
 
 To Do:
 -------
+- [ ] Search specific directory
 - [ ] List files
 - [ ] List resources
 - [ ] Removing images
@@ -42,4 +43,4 @@ To Do:
 - [ColorizeSwift](https://github.com/mtynior/ColorizeSwift)
 
 ## Help, feedback or suggestions?
-Feel free to contact me on [Telegram](http://t.me/beknar "Telegram") for discussions, news & announcements about Sugar & other projects.
+Feel free to contact me on [Telegram](http://t.me/beknar "Telegram") for discussions, news & announcements about Taza & other projects.
