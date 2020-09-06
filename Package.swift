@@ -7,11 +7,12 @@ let package = Package(
     name: "taza",
     dependencies: [
         .package(url: "https://github.com/JohnSundell/Files", from: "4.0.0"),
-        .package(url: "https://github.com/mtynior/ColorizeSwift.git", from: "1.5.0")
+        .package(url: "https://github.com/mtynior/ColorizeSwift.git", from: "1.5.0"),
+        .package(url: "https://github.com/kylef/Commander", from: "0.9.0")
     ],
     targets: [
         .target(
             name: "taza",
-            dependencies: ["Files", "ColorizeSwift"])
+            dependencies: ["Files", "ColorizeSwift", "Commander"])
     ]
 )
