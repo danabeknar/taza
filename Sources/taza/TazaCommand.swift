@@ -12,12 +12,17 @@ struct TazaCommand {
     let finder: Finder
     let logger: Logger
     let loggerViewModel: LoggerViewModelProtocol
+    
+    // MARK: - Private properties
+    let listFiles: Bool
 
     // MARK: - Init
-    init() {
+    init(listFiles: Bool) {
         finder = Finder()
         loggerViewModel = LoggerViewModel(finder: finder)
         logger = Logger(viewModel: loggerViewModel)
+        
+        self.listFiles = listFiles
     }
 
     // MARK: - Public methods
