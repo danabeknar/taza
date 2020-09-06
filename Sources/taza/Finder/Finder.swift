@@ -39,8 +39,8 @@ struct Finder {
     private var resourceController: ResourceControllerProtocol
 
     // MARK: - Init
-    init() {
-        searchableFilesController = SearchableFileController()
+    init(path: String) {
+        searchableFilesController = SearchableFileController(path: path)
         resourceController = ResourceController()
     }
 }

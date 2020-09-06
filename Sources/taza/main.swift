@@ -1,9 +1,10 @@
 import Commander
 
 let main = command(
-    Flag("listFiles", default: false, description: "Should script list all found files")
-) { listFiles in
-    TazaCommand(listFiles: listFiles).run()
+    Option("path", default: ".", flag: "p", description: "Specific path to be searched for."),
+    Flag("listFiles", default: false, description: "List all found files.")
+) { path, listFiles in
+    TazaCommand(path: path, listFiles: listFiles).run()
 }
 
 main.run()

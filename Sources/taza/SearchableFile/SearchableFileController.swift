@@ -20,9 +20,13 @@ struct SearchableFileController: SearchableFileControllerProtocol {
     private lazy var searchableFileTypes = SearchableFileType.allCases.map { $0.rawValue }
 
     // MARK: - Init
-    init() {
-        searchableFiles = Folder.current.files.recursive
-            .map { SearchableFile(file: $0) }
-            .compactMap { $0 }
+    init(path: String) {
+        do {
+            searchableFiles = try Folder(path: path).files.recursive
+                .map { SearchableFile(file: $0) }
+                .compactMap { $0 }
+        } catch {
+            searchableFiles = []
+        }
     }
 }

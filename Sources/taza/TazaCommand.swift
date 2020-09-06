@@ -17,8 +17,8 @@ struct TazaCommand {
     let listFiles: Bool
 
     // MARK: - Init
-    init(listFiles: Bool) {
-        finder = Finder()
+    init(path: String, listFiles: Bool) {
+        finder = Finder(path: path)
         loggerViewModel = LoggerViewModel(finder: finder)
         logger = Logger(viewModel: loggerViewModel, logFiles: listFiles)
         
