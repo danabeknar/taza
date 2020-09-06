@@ -34,7 +34,7 @@ struct Logger {
         print("🗂  \("file".pluralize(count: viewModel.foundFiles.count)) found\(logFiles ? ":" : "")"
                 .lightMagenta())
         
-        if logFiles  {
+        if logFiles {
             viewModel.foundFiles.forEach { file in
                 print("📁 File: \(file.path)")
             }
