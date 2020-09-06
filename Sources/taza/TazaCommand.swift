@@ -6,27 +6,15 @@
 //
 
 import Foundation
+import Commander
 
 struct TazaCommand {
-    // MARK: - Public properties
-    let finder: Finder
-    let logger: Logger
-    let loggerViewModel: LoggerViewModelProtocol
-    
-    // MARK: - Private properties
-    let listFiles: Bool
-
-    // MARK: - Init
-    init(path: String, listFiles: Bool) {
-        finder = Finder(path: path)
-        loggerViewModel = LoggerViewModel(finder: finder)
-        logger = Logger(viewModel: loggerViewModel, logFiles: listFiles)
-        
-        self.listFiles = listFiles
-    }
-
-    // MARK: - Public methods
     func run() {
-        logger.log()
+        command(
+            Option("path", default: ".", flag: "p", description: "Specific path to be searched for."),
+            Flag("listFiles", default: false, description: "List all found files.")
+        ) { path, listFiles in
+            Taza(path: path, listFiles: listFiles).run()
+        }.run()
     }
 }
