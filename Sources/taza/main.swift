@@ -1,7 +1,7 @@
 import Commander
 
 let main = command(
-    Flag("listFiles", description: "Should script list all found files")
+    Flag("listFiles", default: false, description: "Should script list all found files")
 ) { listFiles in
     TazaCommand(listFiles: listFiles).run()
 }

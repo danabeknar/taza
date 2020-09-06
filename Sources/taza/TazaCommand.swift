@@ -20,7 +20,7 @@ struct TazaCommand {
     init(listFiles: Bool) {
         finder = Finder()
         loggerViewModel = LoggerViewModel(finder: finder)
-        logger = Logger(viewModel: loggerViewModel)
+        logger = Logger(viewModel: loggerViewModel, logFiles: listFiles)
         
         self.listFiles = listFiles
     }

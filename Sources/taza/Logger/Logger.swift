@@ -11,10 +11,12 @@ import ColorizeSwift
 struct Logger {
     // MARK: - Private properties
     private let viewModel: LoggerViewModelProtocol
+    private let logFiles: Bool
 
     // MARK: - Init
-    init(viewModel: LoggerViewModelProtocol) {
+    init(viewModel: LoggerViewModelProtocol, logFiles: Bool) {
         self.viewModel = viewModel
+        self.logFiles = logFiles
     }
 
     // MARK: - Public methods
@@ -29,8 +31,14 @@ struct Logger {
         print("\n🕯  Searching files..."
                 .lightMagenta()
                 .bold())
-        print("🗂  \("file".pluralize(count: viewModel.foundFilesCount)) found"
+        print("🗂  \("file".pluralize(count: viewModel.foundFiles.count)) found\(logFiles ? ":" : "")"
                 .lightMagenta())
+        
+        if logFiles  {
+            viewModel.foundFiles.forEach { file in
+                print("📁 File: \(file.path)")
+            }
+        }
     }
 
     private func logFoundResources() {

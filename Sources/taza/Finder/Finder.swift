@@ -26,7 +26,7 @@ struct Finder {
         return resources.filter { !usedResources.contains($0) }
     }
 
-    var searchableFiles: [Searchable] {
+    var searchableFiles: [SearchableFileProtocol] {
         searchableFilesController.searchableFiles
     }
 

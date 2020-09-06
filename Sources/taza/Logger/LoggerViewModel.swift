@@ -9,7 +9,7 @@ import Foundation
 
 protocol LoggerViewModelProtocol {
     var unusedResources: [Resource] { get }
-    var foundFilesCount: Int { get }
+    var foundFiles: [SearchableFileProtocol] { get }
     var foundResourcesCount: Int { get }
 }
 
@@ -19,8 +19,8 @@ struct LoggerViewModel: LoggerViewModelProtocol {
         finder.unusedResourcesInSearchableFiles
     }
 
-    var foundFilesCount: Int {
-        finder.searchableFiles.count
+    var foundFiles: [SearchableFileProtocol] {
+        finder.searchableFiles
     }
 
     var foundResourcesCount: Int {

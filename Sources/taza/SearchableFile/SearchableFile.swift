@@ -7,14 +7,17 @@
 
 import Files
 
-struct SearchableFile: Searchable {
+struct SearchableFile: SearchableFileProtocol {
+    let path: String
     let content: String
     let type: SearchableFileType
     let strategy: SearchStrategy
 
-    private init(type: SearchableFileType, content: String) {
+    private init(path: String, type: SearchableFileType, content: String) {
+        self.path = path
         self.type = type
         self.content = content
+        
         strategy = StrategyFactory.shared.strategy(type: type, content: content)
     }
 
@@ -29,7 +32,7 @@ struct SearchableFile: Searchable {
 
         do {
             let content = try file.readAsString()
-            self.init(type: type, content: content)
+            self.init(path: file.path(relativeTo: Folder.current), type: type, content: content)
         } catch {
             return nil
         }
