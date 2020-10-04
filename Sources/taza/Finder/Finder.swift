@@ -9,38 +9,37 @@ import Foundation
 import Files
 
 struct Finder {
-    // MARK: - Public properties
-    var unusedResourcesInSearchableFiles: [Resource] {
-        var usedResources = [Resource]()
-    
-        for file in searchableFiles {
-            for resource in resources {
-                if file.hasResource(resource) {
-                    usedResources.append(resource)
-
-                    continue
-                }
-            }
-        }
-
-        return resources.filter { !usedResources.contains($0) }
-    }
-
-    var searchableFiles: [SearchableFileProtocol] {
-        searchableFilesController.searchableFiles
-    }
-
-    var resources: [Resource] {
-        resourceController.resources
-    }
-
     // MARK: - Private properties
-    private var searchableFilesController: SearchableFileControllerProtocol
-    private var resourceController: ResourceControllerProtocol
+    private let directory: Directory
+    private let logger: FinderLogger
 
     // MARK: - Init
-    init(path: String) {
-        searchableFilesController = SearchableFileController(path: path)
-        resourceController = ResourceController(path: path)
+    init(directory: Directory, logger: FinderLogger) {
+        self.directory = directory
+        self.logger = logger
+    }
+    
+    // MARK: - Public methods
+    func findUnusedResources() {
+        var unusedResources = [Resource]()
+        
+        logger.logStartSearchingResources()
+        for resource in directory.resources {
+            var resourceIsUnused = true
+            for file in directory.searchableFiles {
+                if file.hasResource(resource) {
+                    resourceIsUnused = false
+                    
+                    break
+                }
+            }
+            
+            if resourceIsUnused {
+                logger.logResource(resource)
+                unusedResources.append(resource)
+            }
+        }
+        
+        logger.logResourcesCount(unusedResources.count)
     }
 }

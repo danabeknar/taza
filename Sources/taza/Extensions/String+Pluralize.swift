@@ -8,7 +8,7 @@
 import Foundation
 
 extension String {
-    func pluralize(count: Int) -> String {
+    func pluralize(_ count: Int) -> String {
         if count == 0 {
             return "No \(self)"
         } else if count == 1 {
