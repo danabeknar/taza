@@ -41,6 +41,6 @@ struct Finder {
     // MARK: - Init
     init(path: String) {
         searchableFilesController = SearchableFileController(path: path)
-        resourceController = ResourceController()
+        resourceController = ResourceController(path: path)
     }
 }

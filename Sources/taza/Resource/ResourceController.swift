@@ -17,9 +17,13 @@ struct ResourceController: ResourceControllerProtocol {
     let resources: [Resource]
 
     // MARK: - Private properties
-    init() {
-        resources = Folder.current.files.recursive
-                        .map { Resource(file: $0) }
-                        .compactMap { $0 }
+    init(path: String) {
+        do {
+            resources = try Folder(path: path).files.recursive
+                            .map { Resource(file: $0) }
+                            .compactMap { $0 }
+        } catch {
+            resources = []
+        }
     }
 }
