@@ -14,7 +14,7 @@ Allows to easily find unused resources in XCode project.
 - If it's `.m` file, the script searches `[UIImage imageNamed:@"imageName"]` & `[UIImage imageNamed:@"imageName.extension"]` occurences;
 - If it's `.xib`/`.storyboard` file, the script searches `image="imageName"` & `image="imageName.extension"`  occurences;
 4.  If the script could find unused image in these files, it prints them in a good-looking way:
-![Result](https://i.imgur.com/HFISKQM.png)
+![Result](https://raw.github.com/danabeknar/taza/develop/Resources/taza.png)
 
 ## Installation
 The easiest way to install Taza is using Swift Package Manager:
@@ -26,21 +26,41 @@ $ cp -f .build/release/taza /usr/local/bin/taza
 ```
 
 ## Usage
-Without any specifications (have to be executed in the directory where Xcode project is located).
+Without any specifications (have to be executed in the directory where Xcode project is located):
 ```bash
 taza
+```
+Specifies path of project to search for:
+```bash
+taza --path ~/Example
+```
+
+Specifies should script list all found files:
+```bash
+taza --listFiles
+```
+
+Specifies should script list all found resources:
+```bash
+taza --listResources
+```
+Or altogether:
+```bash
+taza --path ~/Example --listFiles --listResources
 ```
 
 To Do:
 -------
-- [ ] Search specific directory
-- [ ] List files
-- [ ] List resources
+- [x] Search specific directory
+- [x] List files
+- [x] List resources
+- [x] Ignore pods
 - [ ] Removing images
 
 ## Dependencies
 - [Files](https://github.com/JohnSundell/Files)
 - [ColorizeSwift](https://github.com/mtynior/ColorizeSwift)
+- [Commander](https://github.com/kylef/Commander)
 
 ## Help, feedback or suggestions?
 Feel free to contact me on [Telegram](http://t.me/beknar "Telegram") for discussions, news & announcements about Taza & other projects.
