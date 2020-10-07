@@ -8,7 +8,7 @@
 import Foundation
 import Files
 
-struct Resource: Hashable {
+struct Resource: FileProtocol, Hashable {
     // MARK: - Public properties
     let name: String
     let nameExcludingExtension: String

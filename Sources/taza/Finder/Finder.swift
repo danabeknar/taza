@@ -9,24 +9,25 @@ import Foundation
 import Files
 
 struct Finder {
-    // MARK: - Private properties
-    private let directory: Directory
-    private let logger: FinderLogger
-
-    // MARK: - Init
-    init(directory: Directory, logger: FinderLogger) {
-        self.directory = directory
-        self.logger = logger
+    // MARK: - Public properties
+    var onFindUnusedResource: ((Resource) -> Void)?
+    var onFinishSearch: ((_ count: Int) -> Void)?
+    
+    private let searchableFiles: [SearchableFileProtocol]
+    private let foundResources: [Resource]
+    
+    init(searchableFiles: [SearchableFileProtocol], foundResources: [Resource]) {
+        self.searchableFiles = searchableFiles
+        self.foundResources = foundResources
     }
     
     // MARK: - Public methods
     func findUnusedResources() {
-        var unusedResources = [Resource]()
+        var unusedResourcesCount = 0
         
-        logger.logStartSearchingResources()
-        for resource in directory.resources {
+        for resource in foundResources {
             var resourceIsUnused = true
-            for file in directory.searchableFiles {
+            for file in searchableFiles {
                 if file.hasResource(resource) {
                     resourceIsUnused = false
                     
@@ -35,11 +36,11 @@ struct Finder {
             }
             
             if resourceIsUnused {
-                logger.logResource(resource)
-                unusedResources.append(resource)
+                unusedResourcesCount += 1
+                onFindUnusedResource?(resource)
             }
         }
         
-        logger.logResourcesCount(unusedResources.count)
+        onFinishSearch?(unusedResourcesCount)
     }
 }

@@ -9,7 +9,7 @@ import Foundation
 
 struct Taza {
     // MARK: - Public properties
-    let finder: Finder
+    let logger: Logger
 
     // MARK: - Init
     /// - Parameters:
@@ -17,12 +17,18 @@ struct Taza {
     ///   - listFiles: List all found files
     ///   - listFiles: List all found resources
     init(path: String, listFiles: Bool, listResources: Bool) {
-        finder = Finder(directory: Directory(path: path, listFiles: listFiles, listResources: listResources),
-                        logger: FinderLogger())
+        let filesController = FilesController(path: path)
+        let resourcesController = ResourcesController(path: path)
+        
+        let filesLogger = FilesLogger(filesController: filesController, listFiles: listFiles)
+        let resourceLogger = ResourcesLogger(resourcesController: resourcesController, listResources: listResources)
+        let finderLogger = FinderLogger(searchableFiles: filesController.files, foundResources: resourcesController.resources)
+        
+        logger = Logger(filesLogger: filesLogger, resourceLogger: resourceLogger, finderLogger: finderLogger)
     }
 
     // MARK: - Public methods
     func run() {
-        finder.findUnusedResources()
+        logger.log()
     }
 }

@@ -8,15 +8,29 @@
 import Foundation
 import ColorizeSwift
 
-struct FinderLogger {
+class FinderLogger {
+    // MARK: - Private properties
+    private var finder: Finder
+    
+    // MARK: - Init
+    init(searchableFiles: [SearchableFileProtocol], foundResources: [Resource]) {
+        finder = Finder(searchableFiles: searchableFiles, foundResources: foundResources)
+        bindToFinder()
+    }
+    
     // MARK: - Public methods
+    func log() {
+        logStartSearchingResources()
+        finder.findUnusedResources()
+    }
+    
     func logStartSearchingResources() {
         print("\n🕯  Searching unused resources..."
                 .magenta())
     }
 
-    func logResource(_ image: Resource) {
-        print("🔍 Resource: \(image.name), path: \(image.path)")
+    func logResource(_ resource: Resource) {
+        print("🔍 Resource: \(resource.name), path: \(resource.path)")
     }
 
     func logResourcesCount(_ count: Int) {
@@ -30,5 +44,16 @@ struct FinderLogger {
         print("🧐  I have found \("unused resource".pluralize(count)), make sure to look at them ⬆️"
                 .magenta()
                 .bold())
+    }
+    
+    // MARK: - Private methods
+    private func bindToFinder() {
+        finder.onFindUnusedResource = { [weak self] resource in
+            self?.logResource(resource)
+        }
+        
+        finder.onFinishSearch = { [weak self] count in
+            self?.logResourcesCount(count)
+        }
     }
 }

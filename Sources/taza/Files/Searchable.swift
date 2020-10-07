@@ -11,6 +11,4 @@ protocol Searchable {
     func hasResource(_ resource: Resource) -> Bool
 }
 
-protocol SearchableFileProtocol: Searchable {
-    var path: String { get }
-}
+typealias SearchableFileProtocol = Searchable & FileProtocol
