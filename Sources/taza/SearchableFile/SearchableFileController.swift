@@ -27,6 +27,7 @@ struct SearchableFileController: SearchableFileControllerProtocol {
         logger.logStartSearchingFiles()
         do {
             searchableFiles = try Folder(path: path).files.recursive
+                .filter { !$0.path.contains("Pods") }
                 .map { SearchableFile(file: $0) }
                 .compactMap { $0 }
                 .map { file in

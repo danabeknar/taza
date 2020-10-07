@@ -26,6 +26,7 @@ struct ResourceController: ResourceControllerProtocol {
         logger.logStartSearchingResources()
         do {
             resources = try Folder(path: path).files.recursive
+                            .filter { !$0.path.contains("Pods") }
                             .map { Resource(file: $0) }
                             .compactMap { $0 }
                             .map { resource in
